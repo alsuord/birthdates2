@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10151f" />
+    <title>Birthdate Calculator — Age, Next Birthday & Days Lived</title>
+    <meta name="description" content="Calculate your exact age, next birthday, and days lived from a birth date." />
+    <meta property="og:title" content="Birthdate Calculator" />
+    <meta property="og:description" content="Calculate exact age, next birthday, and days lived from a birth date." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Birthdate Calculator" />
+    <meta name="twitter:description" content="Calculate exact age, next birthday, and days lived from a birth date." />
+    <script id="structured-data-jsonld" type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"Birthdate Calculator","description":"Calculate exact age, next birthday, and days lived from a birth date.","url":"__SITE_URL__"}
+    </script>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <!-- @section: app-shell -->
+    <main class="app-shell">
+      <!-- @section: header -->
+      <header class="site-header" aria-label="Site header">
+        <a class="brand" href="#top" aria-label="Birthdate Calculator home" data-i18n-aria="homeAria">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span><span data-i18n="brandTop">Birthdate</span><br /><strong data-i18n="brandBottom">Calculator</strong></span>
+        </a>
+        <div class="header-actions">
+          <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to Arabic">
+            <span aria-hidden="true">ع</span><span id="languageLabel">العربية</span>
+          </button>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+            <span class="toggle-icon" aria-hidden="true">☾</span>
+            <span class="toggle-label">Dark</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- @section: calculator -->
+      <section class="hero" id="top" aria-labelledby="pageTitle">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="eyebrow">Date &amp; time utility</p>
+          <h1 id="pageTitle"><span data-i18n="titleOne">Find the time</span><br /><em data-i18n="titleTwo">behind your story.</em></h1>
+          <p class="intro-copy" data-i18n="introCopy">Enter a birth date to calculate an exact age, the next birthday milestone, and the number of days lived.</p>
+        </div>
+
+        <div class="calculator-card">
+          <form id="calculatorForm" novalidate>
+            <div class="form-heading">
+              <span class="step-number">01</span>
+              <div>
+                <h2 data-i18n="datesTitle">Your dates</h2>
+                <p data-i18n="datesCopy">Choose a birth date and optional reference date.</p>
+              </div>
+            </div>
+
+            <div class="date-fields">
+              <label class="field-label" for="birthDate">
+                <span data-i18n="birthLabel">Date of birth</span>
+                <input id="birthDate" name="birthDate" type="date" required aria-describedby="birthDateHint" />
+                <small id="birthDateHint" data-i18n="required">Required</small>
+              </label>
+              <label class="field-label" for="referenceDate">
+                <span data-i18n="referenceLabel">Calculate as of</span>
+                <input id="referenceDate" name="referenceDate" type="date" />
+                <small data-i18n="defaultToday">Defaults to today</small>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary-action" type="submit"><span data-i18n="calculate">Calculate age</span> <span class="button-arrow" aria-hidden="true">→</span></button>
+              <button class="text-action" id="todayButton" type="button" data-i18n="useToday">Use today</button>
+            </div>
+            <p class="form-message" id="formMessage" role="alert" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- @section: results -->
+      <section class="results-section" aria-labelledby="resultsTitle">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow" data-i18n="resultEyebrow">Your result</p>
+            <h2 id="resultsTitle" data-i18n="resultsTitle">Your time, measured.</h2>
+          </div>
+          <p class="reference-copy" id="resultReference" data-i18n="selectDate">Select a date to begin</p>
+        </div>
+
+        <div class="age-display" aria-live="polite">
+          <div class="age-unit"><span id="yearsValue">—</span><small data-i18n="years">years</small></div>
+          <span class="age-divider" aria-hidden="true"></span>
+          <div class="age-unit"><span id="monthsValue">—</span><small data-i18n="months">months</small></div>
+          <span class="age-divider" aria-hidden="true"></span>
+          <div class="age-unit"><span id="daysValue">—</span><small data-i18n="days">days</small></div>
+        </div>
+
+        <div class="detail-grid">
+          <article class="detail-card milestone-card">
+            <div class="card-kicker"><span class="mini-mark milestone-mark" aria-hidden="true"></span><span data-i18n="nextBirthday">Next birthday</span></div>
+            <h3 id="nextBirthdayValue">—</h3>
+            <p id="birthdayDetail" data-i18n="birthdayPlaceholder">Your next milestone will appear here.</p>
+          </article>
+          <article class="detail-card">
+            <div class="card-kicker"><span class="mini-mark day-mark" aria-hidden="true"></span><span data-i18n="daysLived">Days lived</span></div>
+            <h3 id="daysLivedValue">—</h3>
+            <p id="daysLivedDetail" data-i18n="daysPlaceholder">A small number with a big story.</p>
+          </article>
+          <article class="detail-card">
+            <div class="card-kicker"><span class="mini-mark zodiac-mark" aria-hidden="true"></span><span data-i18n="weekday">Day of the week</span></div>
+            <h3 id="weekdayValue">—</h3>
+            <p id="birthDateDetail" data-i18n="weekdayPlaceholder">Based on your date of birth.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- @section: footer -->
+      <footer class="site-footer">
+        <span data-i18n="footerOne">Made for small moments of perspective.</span>
+        <span data-i18n="footerTwo">All calculations stay in your browser.</span>
+      </footer>
+    </main>
+    <script type="module" src="assets/main.js"></script>
+  </body>
+</html>
